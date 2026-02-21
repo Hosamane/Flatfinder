@@ -28,7 +28,8 @@ COPY . .
 RUN npm install
 
 COPY . .
-RUN npx ng build frontend --configuration production
+RUN npx ng build --configuration production
+# RUN npx ng build frontend --configuration production
 
 # Production stage
 FROM nginx:alpine
