@@ -17,4 +17,5 @@ COPY . .
 EXPOSE 5000
 
 # Start app with gunicorn
-CMD ["gunicorn", "run:app", "--bind", "0.0.0.0:$PORT"]
+# CMD ["gunicorn", "run:app", "--bind", "0.0.0.0:$PORT"]
+CMD ["sh", "-c", "gunicorn run:app --bind 0.0.0.0:$PORT"]
