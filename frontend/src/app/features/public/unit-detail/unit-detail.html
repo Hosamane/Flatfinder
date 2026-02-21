@@ -1,0 +1,162 @@
+<!-- <div *ngIf="unit; else loadingTemplate"
+     class="min-h-screen bg-gray-100 p-8">
+
+  <div class="max-w-4xl mx-auto bg-white rounded-2xl shadow p-8">
+    <img *ngIf="unit.image_url"
+     [src]="unit.image_url"
+     class="w-full h-64 object-cover rounded-xl">
+
+
+    <h1 class="text-2xl font-bold mb-4">
+      {{ unit.unit_code }}
+    </h1>
+
+    <p class="text-xl text-blue-600 mb-4">
+      ₹{{ unit.rent }}
+    </p>
+
+    <div class="grid grid-cols-2 gap-4 text-gray-600">
+
+    
+    
+      <p><strong>Type:</strong> {{ unit.flat_type }}</p>
+      <p><strong>Furnishing:</strong> {{ unit.furnishing }}</p>
+      <p><strong>Balcony:</strong> {{ unit.balcony_type }}</p>
+      <p><strong>Facing:</strong> {{ unit.facing_direction }}</p>
+      <p><strong>Parking:</strong> {{ unit.parking ? 'Yes' : 'No' }}</p>
+      <p><strong>Available From:</strong> {{ unit.available_from }}</p>
+
+    </div>
+
+
+    <div class="grid grid-cols-2 gap-4 mt-6">
+
+  <div>
+    <label class="block mb-1 font-medium">Lease Start</label>
+    <input type="date"
+           [(ngModel)]="leaseStart" name="leaseStart"
+           [min]="today"
+           (change)="onStartDateChange()"
+           class="w-full border rounded-lg p-2">
+  </div>
+
+  <div>
+    <label class="block mb-1 font-medium">Lease End</label>
+    <input type="date"
+           [(ngModel)]="leaseEnd" name="leaseEnd"
+           [min]="minEndDate"
+           class="w-full border rounded-lg p-2">
+  </div>
+
+</div>
+
+
+
+
+  <button
+  (click)="bookUnit()"
+  class="mt-6 w-full bg-green-600 text-white py-3 rounded-lg hover:bg-green-700 transition">
+  Book Now
+</button>
+
+
+  </div>
+
+</div>
+
+<ng-template #loadingTemplate>
+  <div class="text-center mt-20 text-gray-500">
+    Loading unit details...
+  </div>
+</ng-template>
+
+
+ -->
+
+
+
+
+ <div *ngIf="unit; else loadingTemplate" class="min-h-screen bg-slate-50 py-12 px-4">
+  <div class="max-w-5xl mx-auto">
+    
+    <div class="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden">
+      
+      <div class="relative h-80 w-full bg-gray-200">
+        <img *ngIf="unit.image_url" [src]="unit.image_url" class="w-full h-full object-cover">
+        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-8">
+          <span class="bg-blue-600 text-white text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full">
+            {{ unit.flat_type }}
+          </span>
+          <h1 class="text-3xl font-bold text-white mt-2">{{ unit.unit_code }}</h1>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-0">
+        
+        <div class="lg:col-span-2 p-8 border-r border-gray-100">
+          <h2 class="text-sm font-semibold text-gray-400 uppercase tracking-widest mb-6">Unit Specifications</h2>
+          
+          <div class="grid grid-cols-2 md:grid-cols-3 gap-8">
+            <div class="flex flex-col">
+              <span class="text-gray-500 text-sm">Furnishing</span>
+              <span class="font-medium text-gray-900">{{ unit.furnishing }}</span>
+            </div>
+            <div class="flex flex-col">
+              <span class="text-gray-500 text-sm">Balcony</span>
+              <span class="font-medium text-gray-900">{{ unit.balcony_type }}</span>
+            </div>
+            <div class="flex flex-col">
+              <span class="text-gray-500 text-sm">Facing</span>
+              <span class="font-medium text-gray-900">{{ unit.facing_direction }}</span>
+            </div>
+            <div class="flex flex-col">
+              <span class="text-gray-500 text-sm">Parking</span>
+              <span class="font-medium text-gray-900">{{ unit.parking ? 'Available' : 'Not Available' }}</span>
+            </div>
+            <div class="flex flex-col">
+              <span class="text-gray-500 text-sm">Available From</span>
+              <span class="font-medium text-blue-600">{{ unit.available_from }}</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="lg:col-span-1 p-8 bg-gray-50/50">
+          <div class="flex items-baseline justify-between mb-6">
+            <span class="text-gray-600">Monthly Rent</span>
+            <span class="text-2xl font-bold text-gray-900">₹{{ unit.rent }}</span>
+          </div>
+
+          <div class="space-y-4">
+            <div>
+              <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Lease Start</label>
+              <input type="date" [(ngModel)]="leaseStart" name="leaseStart" [min]="today" (change)="onStartDateChange()"
+                     class="w-full border-gray-200 rounded-xl p-3 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition shadow-sm">
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Lease End</label>
+              <input type="date" [(ngModel)]="leaseEnd" name="leaseEnd" [min]="minEndDate"
+                     class="w-full border-gray-200 rounded-xl p-3 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition shadow-sm">
+            </div>
+
+            <button (click)="bookUnit()"
+                    class="w-full bg-slate-900 text-white font-bold py-4 rounded-xl hover:bg-blue-700 transform active:scale-[0.98] transition-all shadow-lg shadow-blue-900/10 mt-4">
+              Reserve This Unit
+            </button>
+            <p class="text-center text-xs text-gray-400 mt-2">No hidden charges. Paperless process.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #loadingTemplate>
+  <div class="min-h-screen flex items-center justify-center">
+    <div class="flex flex-col items-center">
+      <div class="animate-spin rounded-full h-10 w-10 border-b-2 border-blue-600 mb-4"></div>
+      <p class="text-gray-500 animate-pulse">Fetching unit details...</p>
+    </div>
+  </div>
+</ng-template>

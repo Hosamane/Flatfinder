@@ -1,0 +1,21 @@
+                   List of relations
+ Schema |          Name          |   Type   |  Owner   
+--------+------------------------+----------+----------
+ public | alembic_version        | table    | postgres
+ public | amenities              | table    | postgres
+ public | amenities_id_seq       | sequence | postgres
+ public | bookings               | table    | postgres
+ public | bookings_id_seq        | sequence | postgres
+ public | images                 | table    | postgres
+ public | images_id_seq          | sequence | postgres
+ public | tenant_profiles        | table    | postgres
+ public | tenant_profiles_id_seq | sequence | postgres
+ public | tower_amenities        | table    | postgres
+ public | towers                 | table    | postgres
+ public | towers_id_seq          | sequence | postgres
+ public | units                  | table    | postgres
+ public | units_id_seq           | sequence | postgres
+ public | users                  | table    | postgres
+ public | users_id_seq           | sequence | postgres
+(16 rows)
+

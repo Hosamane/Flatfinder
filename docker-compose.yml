@@ -1,0 +1,51 @@
+# version: "3.9"
+
+services:
+
+  db:
+    image: postgres:15
+    container_name: flatfinder-db
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: rental_dev
+    # ports:
+      # - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build: ./backend
+    container_name: flatfinder-backend
+    restart: always
+    ports:
+      - "5000:5000"
+    environment:
+      DATABASE_URL: postgresql://postgres:password@db:5432/rental_dev
+      JWT_SECRET_KEY: super_secure_32_byte_secret_key_123456789
+      FRONTEND_URL: http://localhost:4200
+      CLOUD_NAME: "dhjt8bzpq"
+      CLOUD_API_KEY: "458966575764943"
+      CLOUD_API_SECRET: "oyB4zG1XlorgukdS_LuGqNEZznY"
+    depends_on:
+      db:
+        condition: service_healthy
+
+
+  frontend:
+    build: ./frontend
+    container_name: flatfinder-frontend
+    restart: always
+    ports:  
+      - "8080:80"
+    depends_on:
+      - backend
+
+volumes:
+  postgres_data:

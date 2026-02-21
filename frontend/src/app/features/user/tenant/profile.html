@@ -1,0 +1,244 @@
+<!-- <div class="max-w-3xl mx-auto bg-white p-8 rounded-xl shadow">
+
+  <h2 class="text-2xl font-semibold mb-6">
+    Tenant Profile
+  </h2>
+
+  
+  <div class="mb-4">
+    <label class="block mb-2 font-medium">Tenant Type</label>
+    <select [(ngModel)]="profile.tenant_type"
+            class="w-full border rounded-lg p-2">
+      <option value="">Select Type</option>
+      <option value="STUDENT">Student</option>
+      <option value="WORKING">Working Professional</option>
+    </select>
+  </div>
+
+  
+  <div class="mb-4">
+    <label class="block mb-2 font-medium">Date of Birth</label>
+    <input type="date"
+           [(ngModel)]="profile.date_of_birth"
+           class="w-full border rounded-lg p-2">
+  </div>
+
+  
+  <div *ngIf="profile.tenant_type === 'STUDENT'">
+
+    <div class="mb-4">
+      <label class="block mb-2 font-medium">College Name</label>
+      <input type="text"
+             [(ngModel)]="profile.college_name"
+             class="w-full border rounded-lg p-2">
+    </div>
+
+    <div class="mb-4">
+      <label class="block mb-2 font-medium">Department</label>
+      <input type="text"
+             [(ngModel)]="profile.department"
+             class="w-full border rounded-lg p-2">
+    </div>
+
+  </div>
+
+  
+  <div *ngIf="profile.tenant_type === 'WORKING'">
+
+    <div class="mb-4">
+      <label class="block mb-2 font-medium">Company Name</label>
+      <input type="text"
+             [(ngModel)]="profile.company_name"
+             class="w-full border rounded-lg p-2">
+    </div>
+
+    <div class="mb-4">
+      <label class="block mb-2 font-medium">Designation</label>
+      <input type="text"
+             [(ngModel)]="profile.designation"
+             class="w-full border rounded-lg p-2">
+    </div>
+
+  </div>
+
+  
+  <div class="mb-4">
+    <label class="block mb-2 font-medium">ID Proof Type</label>
+    <select [(ngModel)]="profile.id_proof_type"
+            class="w-full border rounded-lg p-2">
+      <option value="">Select ID Type</option>
+      <option value="PAN">PAN</option>
+      <option value="AADHAAR">AADHAAR</option>
+    </select>
+  </div>
+
+  <div class="mb-6">
+    <label class="block mb-2 font-medium">ID Proof Number</label>
+    <input type="text"
+           [(ngModel)]="profile.id_proof_number"
+           class="w-full border rounded-lg p-2">
+  </div>
+
+  
+  <button
+    (click)="saveProfile()"
+    [disabled]="loading"
+    class="bg-indigo-600 text-white px-6 py-2 rounded-lg hover:bg-indigo-700 transition">
+
+    {{ loading ? 'Saving...' : 'Save Profile' }}
+
+  </button>
+
+</div> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="max-w-2xl mx-auto my-10 bg-slate-50 border border-slate-200 rounded-2xl shadow-sm overflow-hidden">
+  
+  <div class="bg-indigo-600 p-6">
+    <h2 class="text-xl font-bold text-white flex items-center gap-2">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+      </svg>
+      Tenant Profile
+    </h2>
+    <p class="text-indigo-100 text-sm mt-1">Complete your details to finalize your residency.</p>
+  </div>
+
+  <div class="p-8 space-y-8">
+    
+    <section class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="space-y-2">
+        <label class="text-xs font-bold uppercase tracking-wider text-slate-500">Tenant Type</label>
+        <select [(ngModel)]="profile.tenant_type"
+                class="w-full bg-white border border-slate-300 rounded-xl p-3 outline-none focus:ring-2 focus:ring-indigo-500 transition-all cursor-pointer">
+          <option value="">Select Type</option>
+          <option value="STUDENT">Student</option>
+          <option value="WORKING">Working Professional</option>
+        </select>
+      </div>
+
+      <div class="space-y-2">
+        <label class="text-xs font-bold uppercase tracking-wider text-slate-500">Date of Birth</label>
+        <input type="date"
+               [(ngModel)]="profile.date_of_birth"
+               class="w-full bg-white border border-slate-300 rounded-xl p-3 outline-none focus:ring-2 focus:ring-indigo-500 transition-all">
+      </div>
+    </section>
+
+    <hr class="border-slate-200">
+
+    <div *ngIf="profile.tenant_type === 'STUDENT'" class="space-y-6 animate-in fade-in duration-500">
+      <div class="flex items-center gap-2 text-indigo-600 font-semibold mb-2">
+         <span class="p-1.5 bg-indigo-100 rounded-md">🎓</span> Academic Details
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="space-y-2">
+          <label class="text-xs font-bold uppercase tracking-wider text-slate-500">College Name</label>
+          <input type="text" [(ngModel)]="profile.college_name" placeholder="e.g. Stanford University"
+                 class="w-full bg-white border border-slate-300 rounded-xl p-3 focus:ring-2 focus:ring-indigo-500 outline-none">
+        </div>
+        <div class="space-y-2">
+          <label class="text-xs font-bold uppercase tracking-wider text-slate-500">Department</label>
+          <input type="text" [(ngModel)]="profile.department" placeholder="e.g. Computer Science"
+                 class="w-full bg-white border border-slate-300 rounded-xl p-3 focus:ring-2 focus:ring-indigo-500 outline-none">
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="profile.tenant_type === 'WORKING'" class="space-y-6 animate-in fade-in duration-500">
+      <div class="flex items-center gap-2 text-indigo-600 font-semibold mb-2">
+        <span class="p-1.5 bg-indigo-100 rounded-md">💼</span> Professional Details
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="space-y-2">
+          <label class="text-xs font-bold uppercase tracking-wider text-slate-500">Company Name</label>
+          <input type="text" [(ngModel)]="profile.company_name" placeholder="e.g. Google"
+                 class="w-full bg-white border border-slate-300 rounded-xl p-3 focus:ring-2 focus:ring-indigo-500 outline-none">
+        </div>
+        <div class="space-y-2">
+          <label class="text-xs font-bold uppercase tracking-wider text-slate-500">Designation</label>
+          <input type="text" [(ngModel)]="profile.designation" placeholder="e.g. Software Engineer"
+                 class="w-full bg-white border border-slate-300 rounded-xl p-3 focus:ring-2 focus:ring-indigo-500 outline-none">
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-white border border-slate-200 p-6 rounded-2xl space-y-6">
+       <div class="text-indigo-600 font-semibold flex items-center gap-2">
+        <span class="p-1.5 bg-indigo-100 rounded-md">🆔</span> Identity Verification
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="space-y-2">
+          <label class="text-xs font-bold uppercase tracking-wider text-slate-500">ID Proof Type</label>
+          <select [(ngModel)]="profile.id_proof_type"
+                  class="w-full bg-slate-50 border border-slate-300 rounded-xl p-3 focus:ring-2 focus:ring-indigo-500 outline-none">
+            <option value="">Select ID Type</option>
+            <option value="PAN">PAN</option>
+            <option value="AADHAAR">AADHAAR</option>
+          </select>
+        </div>
+        <div class="space-y-2">
+          <label class="text-xs font-bold uppercase tracking-wider text-slate-500">ID Proof Number</label>
+          <input type="text" [(ngModel)]="profile.id_proof_number"
+                 class="w-full bg-slate-50 border border-slate-300 rounded-xl p-3 focus:ring-2 focus:ring-indigo-500 outline-none">
+        </div>
+      </div>
+    </div>
+
+    <div class="pt-4">
+      <button
+        (click)="saveProfile()"
+        [disabled]="loading"
+        class="w-full md:w-auto min-w-[160px] bg-indigo-600 text-white font-bold py-4 px-8 rounded-xl hover:bg-indigo-700 active:scale-[0.98] transition-all disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2 shadow-lg shadow-indigo-200">
+        
+        <span *ngIf="loading" class="animate-spin rounded-full h-4 w-4 border-2 border-white border-t-transparent"></span>
+        {{ loading ? 'Saving Information...' : 'Save Profile' }}
+      </button>
+    </div>
+
+  </div>
+</div>

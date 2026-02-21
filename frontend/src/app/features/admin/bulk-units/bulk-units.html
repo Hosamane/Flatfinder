@@ -1,0 +1,409 @@
+<!-- <h2 class="text-2xl font-bold mb-6">Bulk Unit Creation</h2>
+
+<div class="bg-white p-6 rounded-xl shadow">
+
+  
+  <select [(ngModel)]="selectedTower"
+          class="border p-2 rounded mb-4 w-full">
+    <option value="">Select Tower</option>
+    <option *ngFor="let t of towers"
+            [value]="t.code">
+      {{ t.name }} ({{ t.code }})
+    </option>
+  </select>
+
+  <div class="grid grid-cols-2 gap-4">
+
+    <input [(ngModel)]="form.wing"
+           placeholder="Wing (A/B)"
+           class="border p-2 rounded">
+
+    <input [(ngModel)]="form.rent"
+           type="number"
+           placeholder="Rent"
+           class="border p-2 rounded">
+
+    <input [(ngModel)]="form.floor_number"
+           type="number"
+           placeholder="Floor Number"
+           class="border p-2 rounded">
+
+    
+
+    <input [(ngModel)]="form.start_flat"
+           type="number"
+           placeholder="Flat Start (101)"
+           class="border p-2 rounded">
+
+    <input [(ngModel)]="form.end_flat"
+           type="number"
+           placeholder="Flat End (104)"
+           class="border p-2 rounded">
+
+    <input [(ngModel)]="form.available_from"
+           type="date"
+           class="border p-2 rounded">
+
+    <select [(ngModel)]="form.flat_type"
+            class="border p-2 rounded">
+      <option value="">Flat Type</option>
+      <option>1BHK</option>
+      <option>2BHK</option>
+      <option>3BHK</option>
+    </select>
+
+    <select [(ngModel)]="form.furnishing"
+            class="border p-2 rounded">
+      <option value="">Furnishing</option>
+      <option>Fully Furnished</option>
+      <option>Fully Furnished AC</option>
+      <option>Semi-Furnished</option>
+    </select>
+
+    <select [(ngModel)]="form.balcony_type"
+            class="border p-2 rounded">
+      <option value="">Balcony</option>
+      <option>Double Balcony</option>
+      <option>Without Balcony</option>
+    </select>
+
+    <select [(ngModel)]="form.facing_direction"
+            class="border p-2 rounded">
+      <option value="">Facing</option>
+      <option>East</option>
+      <option>West</option>
+      <option>North</option>
+      <option>South</option>
+    </select>
+
+    <label class="flex items-center space-x-2">
+      <input type="checkbox"
+             [(ngModel)]="form.parking">
+      <span>Parking Available</span>
+    </label>
+
+    <label class="flex items-center space-x-2">
+      <input type="checkbox"
+             [(ngModel)]="form.is_active">
+      <span>Active</span>
+    </label>
+
+  </div>
+
+  <button (click)="createBulk()"
+          class="mt-6 bg-green-600 text-white px-6 py-2 rounded">
+    Create Units
+  </button>
+
+</div>  -->
+
+
+<div class="max-w-4xl mx-auto p-6 bg-gray-50 min-h-screen">
+  <div class="flex items-center justify-between mb-8">
+    <h2 class="text-3xl font-extrabold text-gray-800">Bulk Unit Creation</h2>
+    <span class="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm font-medium">Administrator Portal</span>
+  </div>
+
+  <div class="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
+    <div class="p-6 border-b border-gray-100">
+      <h3 class="text-lg font-semibold text-gray-700 mb-4 flex items-center">
+        <span class="w-8 h-8 bg-blue-50 text-blue-600 rounded-lg flex items-center justify-center mr-3">1</span>
+        Building Details
+      </h3>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="space-y-1">
+          <label class="text-sm font-medium text-gray-600">Tower Selection</label>
+          <select [(ngModel)]="selectedTower" class="w-full border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 p-2.5 bg-gray-50">
+            <option value="">Select Tower</option>
+            <option *ngFor="let t of towers" [value]="t.code">{{ t.name }} ({{ t.code }})</option>
+          </select>
+        </div>
+
+        <div class="space-y-1">
+          <label class="text-sm font-medium text-gray-600">Wing</label>
+          <input [(ngModel)]="form.wing" placeholder="e.g. A" class="w-full border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 p-2.5">
+        </div>
+
+        <div class="space-y-1">
+          <label class="text-sm font-medium text-gray-600">Floor Number</label>
+          <input [(ngModel)]="form.floor_number" type="number" placeholder="e.g. 1" class="w-full border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 p-2.5">
+        </div>
+      </div>
+    </div>
+
+    <div class="p-6 border-b border-gray-100 bg-gray-50/30">
+      <h3 class="text-lg font-semibold text-gray-700 mb-4 flex items-center">
+        <span class="w-8 h-8 bg-green-50 text-green-600 rounded-lg flex items-center justify-center mr-3">2</span>
+        Unit Inventory Range
+      </h3>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="space-y-1">
+          <label class="text-sm font-medium text-gray-600">Flat Start No.</label>
+          <input [(ngModel)]="form.start_flat" type="number" placeholder="e.g. 101" class="w-full border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 p-2.5">
+        </div>
+
+        <div class="space-y-1">
+          <label class="text-sm font-medium text-gray-600">Flat End No.</label>
+          <input [(ngModel)]="form.end_flat" type="number" placeholder="e.g. 104" class="w-full border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 p-2.5">
+        </div>
+
+        <div class="space-y-1">
+          <label class="text-sm font-medium text-gray-600">Monthly Rent (₹)</label>
+          <input [(ngModel)]="form.rent" type="number" placeholder="0.00" class="w-full border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 p-2.5 font-semibold text-green-700">
+        </div>
+      </div>
+    </div>
+
+    <div class="p-6">
+      <h3 class="text-lg font-semibold text-gray-700 mb-4 flex items-center">
+        <span class="w-8 h-8 bg-purple-50 text-purple-600 rounded-lg flex items-center justify-center mr-3">3</span>
+        Specifications
+      </h3>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="space-y-1">
+          <label class="text-sm font-medium text-gray-600">Flat Type</label>
+          <select [(ngModel)]="form.flat_type" class="w-full border-gray-300 rounded-lg p-2.5">
+            <option value="">Select Type</option>
+            <option>1BHK</option>
+            <option>2BHK</option>
+            <option>3BHK</option>
+          </select>
+        </div>
+
+        <div class="space-y-1">
+          <label class="text-sm font-medium text-gray-600">Furnishing</label>
+          <select [(ngModel)]="form.furnishing" class="w-full border-gray-300 rounded-lg p-2.5">
+            <option value="">Select Option</option>
+            <option>Fully Furnished</option>
+            <option>Fully Furnished AC</option>
+            <option>Semi-Furnished</option>
+          </select>
+        </div>
+
+        <div class="space-y-1">
+          <label class="text-sm font-medium text-gray-600">Balcony</label>
+          <select [(ngModel)]="form.balcony_type" class="w-full border-gray-300 rounded-lg p-2.5">
+            <option value="">Select Option</option>
+            <option>Road Facing Balcony</option>
+            <option>Without Road Facing Balcony</option>
+            <option> Without Road Facing Balcony</option> 
+            <option> Triple Balcony No Road</option>
+            <option> Triple Balcony Road facing</option>
+            <option>Without Balcony</option>
+            <option> Without Road Facing Double Balcony</option>
+            <option>Double Balcony</option>
+          </select>
+        </div>
+
+        <div class="space-y-1">
+          <label class="text-sm font-medium text-gray-600">Facing</label>
+          <select [(ngModel)]="form.facing_direction" class="w-full border-gray-300 rounded-lg p-2.5">
+            <option value="">Select Facing</option>
+            <option>East</option>
+            <option>West</option>
+            <option>North</option>
+            <option>South</option>
+            <option>North-East</option>
+            <option>North-West</option>
+            <option>South-East</option>
+            <option>South-West</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-8 items-end">
+        <div class="space-y-1">
+          <label class="text-sm font-medium text-gray-600">Available From</label>
+          <input [(ngModel)]="form.available_from" type="date" class="w-full border-gray-300 rounded-lg p-2.5">
+        </div>
+
+        <div class="flex items-center space-x-6 pb-2">
+          <label class="flex items-center cursor-pointer group">
+            <input type="checkbox" [(ngModel)]="form.parking" class="w-5 h-5 rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+            <span class="ml-2 text-gray-700 group-hover:text-blue-600 transition-colors">Parking Available</span>
+          </label>
+
+          <label class="flex items-center cursor-pointer group">
+            <input type="checkbox" [(ngModel)]="form.is_active" class="w-5 h-5 rounded border-gray-300 text-green-600 focus:ring-green-500">
+            <span class="ml-2 text-gray-700 group-hover:text-green-600 transition-colors">Active Status</span>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-gray-50 px-6 py-4 flex items-center justify-end border-t border-gray-200">
+      <button type="button" class="mr-4 text-gray-600 font-medium hover:text-gray-800">Cancel</button>
+      <button (click)="createBulk()" 
+              class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-xl font-bold shadow-lg shadow-blue-200 transition-all active:scale-95">
+        Generate Units Now
+      </button>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 
+old gemini one 
+<div class="max-w-4xl mx-auto pb-20">
+  <div class="mb-10">
+    <h2 class="text-3xl font-extrabold text-zinc-900 tracking-tight">Bulk Unit Generator</h2>
+    <p class="text-zinc-500 mt-1">Generate multiple inventory records instantly using a floor template.</p>
+  </div>
+
+  <div class="bg-white border border-zinc-200 rounded-[2.5rem] shadow-xl shadow-zinc-200/50 overflow-hidden">
+    
+    <div class="p-8 border-b border-zinc-100 bg-zinc-50/30">
+      <div class="flex items-center gap-3 mb-6">
+        <span class="flex h-8 w-8 items-center justify-center rounded-full bg-zinc-900 text-white text-xs font-bold">1</span>
+        <h3 class="font-bold text-zinc-800">Target Location & Range</h3>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="md:col-span-2">
+          <label class="block text-xs font-bold text-zinc-400 uppercase mb-2 ml-1">Select Tower</label>
+          <select [(ngModel)]="selectedTower"
+                  class="w-full bg-white border-2 border-zinc-200 rounded-2xl px-4 py-3 text-sm focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10 outline-none transition-all">
+            <option value="">Choose a tower...</option>
+            <option *ngFor="let t of towers" [value]="t.code">{{ t.name }} ({{ t.code }})</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-zinc-400 uppercase mb-2 ml-1">Wing</label>
+          <input [(ngModel)]="form.wing" placeholder="e.g. A"
+                 class="w-full bg-white border-2 border-zinc-200 rounded-2xl px-4 py-3 text-sm focus:border-indigo-500 outline-none transition-all">
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
+        <div>
+          <label class="block text-xs font-bold text-zinc-400 uppercase mb-2 ml-1">Floor Number</label>
+          <input [(ngModel)]="form.floor_number" type="number" placeholder="0"
+                 class="w-full bg-white border-2 border-zinc-200 rounded-2xl px-4 py-3 text-sm focus:border-indigo-500 outline-none transition-all">
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-zinc-400 uppercase mb-2 ml-1">Start Series</label>
+          <input [(ngModel)]="form.start_flat" type="number" placeholder="101"
+                 class="w-full bg-white border-2 border-zinc-200 rounded-2xl px-4 py-3 text-sm focus:border-indigo-500 outline-none transition-all">
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-zinc-400 uppercase mb-2 ml-1">End Series</label>
+          <input [(ngModel)]="form.end_flat" type="number" placeholder="110"
+                 class="w-full bg-white border-2 border-zinc-200 rounded-2xl px-4 py-3 text-sm focus:border-indigo-500 outline-none transition-all">
+        </div>
+      </div>
+    </div>
+
+    <div class="p-8">
+      <div class="flex items-center gap-3 mb-6">
+        <span class="flex h-8 w-8 items-center justify-center rounded-full bg-zinc-900 text-white text-xs font-bold">2</span>
+        <h3 class="font-bold text-zinc-800">Unit Template Attributes</h3>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="space-y-4">
+          <div>
+            <label class="block text-xs font-bold text-zinc-400 uppercase mb-2 ml-1">Monthly Rent</label>
+            <input [(ngModel)]="form.rent" type="number" placeholder="0.00"
+                   class="w-full bg-zinc-50 border-2 border-zinc-200 rounded-2xl px-4 py-3 text-sm font-bold text-emerald-600 focus:bg-white focus:border-emerald-500 outline-none transition-all">
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-zinc-400 uppercase mb-2 ml-1">Available From</label>
+            <input [(ngModel)]="form.available_from" type="date"
+                   class="w-full bg-zinc-50 border-2 border-zinc-200 rounded-2xl px-4 py-3 text-sm focus:bg-white focus:border-indigo-500 outline-none transition-all">
+          </div>
+        </div>
+
+        <div class="space-y-4">
+          <div>
+            <label class="block text-xs font-bold text-zinc-400 uppercase mb-2 ml-1">Configuration</label>
+            <select [(ngModel)]="form.flat_type" class="w-full bg-zinc-50 border-2 border-zinc-200 rounded-2xl px-4 py-3 text-sm focus:border-indigo-500 outline-none transition-all">
+              <option value="">Flat Type</option>
+              <option>1BHK</option><option>2BHK</option><option>3BHK</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-zinc-400 uppercase mb-2 ml-1">Furnishing</label>
+            <select [(ngModel)]="form.furnishing" class="w-full bg-zinc-50 border-2 border-zinc-200 rounded-2xl px-4 py-3 text-sm focus:border-indigo-500 outline-none transition-all">
+              <option value="">Furnishing</option>
+              <option>Fully Furnished</option><option>Semi-Furnished</option><option>Unfurnished</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="space-y-4">
+          <div>
+            <label class="block text-xs font-bold text-zinc-400 uppercase mb-2 ml-1">View / Facing</label>
+            <select [(ngModel)]="form.facing_direction" class="w-full bg-zinc-50 border-2 border-zinc-200 rounded-2xl px-4 py-3 text-sm focus:border-indigo-500 outline-none transition-all">
+              <option value="">Facing</option>
+              <option>East</option><option>West</option><option>North</option><option>South</option>
+            </select>
+          </div>
+          <div class="flex gap-3 h-[48px] mt-[26px]">
+            <label class="flex-1 flex items-center justify-center gap-2 bg-zinc-50 border-2 border-zinc-200 rounded-2xl cursor-pointer hover:bg-zinc-100 transition-all">
+              <input type="checkbox" [(ngModel)]="form.parking" class="w-4 h-4 rounded text-indigo-600 focus:ring-indigo-500">
+              <span class="text-xs font-bold text-zinc-600">Parking</span>
+            </label>
+            <label class="flex-1 flex items-center justify-center gap-2 bg-zinc-50 border-2 border-zinc-200 rounded-2xl cursor-pointer hover:bg-zinc-100 transition-all">
+              <input type="checkbox" [(ngModel)]="form.is_active" class="w-4 h-4 rounded text-emerald-600 focus:ring-emerald-500">
+              <span class="text-xs font-bold text-zinc-600">Active</span>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-12 p-6 bg-indigo-50 rounded-3xl border border-indigo-100 flex flex-col md:flex-row items-center justify-between gap-6">
+        <div class="flex items-center gap-4">
+          <div class="h-12 w-12 bg-indigo-600 rounded-2xl flex items-center justify-center text-white shadow-lg shadow-indigo-200">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 002-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+            </svg>
+          </div>
+          <div>
+            <p class="text-xs font-bold text-indigo-400 uppercase tracking-wider">Ready to Generate</p>
+            <p class="text-sm font-medium text-indigo-900">
+              This will create units from 
+              <span class="font-bold underline">{{ form.start_flat || '?' }}</span> to 
+              <span class="font-bold underline">{{ form.end_flat || '?' }}</span>.
+            </p>
+          </div>
+        </div>
+        
+        <button (click)="createBulk()" 
+                class="w-full md:w-auto bg-zinc-900 hover:bg-indigo-600 text-white px-10 py-4 rounded-2xl font-bold text-sm transition-all shadow-xl shadow-zinc-200 active:scale-95">
+          Generate Units Now
+        </button>
+      </div>
+    </div>
+  </div>
+</div>  -->

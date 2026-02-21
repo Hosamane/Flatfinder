@@ -1,0 +1,88 @@
+<!-- <div class="min-h-screen flex items-center justify-center bg-gray-100">
+
+  <div class="bg-white p-8 rounded-xl shadow w-96">
+
+    <h2 class="text-xl font-bold mb-6 text-center">
+      Admin Login
+    </h2>
+
+    <input type="email"
+           [(ngModel)]="email"
+           placeholder="Email"
+           class="w-full border p-2 rounded mb-4">
+
+    <input type="password"
+           [(ngModel)]="password"
+           placeholder="Password"
+           class="w-full border p-2 rounded mb-4">
+
+    <button
+      (click)="login()"
+      class="w-full bg-black text-white py-2 rounded">
+
+      Login
+    </button>
+
+  </div>
+
+</div> -->
+
+
+
+
+<div class="min-h-screen flex items-center justify-center bg-slate-900 px-4">
+  
+  <div class="absolute inset-0 overflow-hidden pointer-events-none">
+    <div class="absolute -top-24 -left-24 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl"></div>
+    <div class="absolute -bottom-24 -right-24 w-96 h-96 bg-slate-500/10 rounded-full blur-3xl"></div>
+  </div>
+
+  <div class="bg-white p-10 rounded-2xl shadow-2xl w-full max-w-md relative">
+    
+    <div class="absolute top-0 left-0 right-0 h-1.5 bg-black rounded-t-2xl"></div>
+
+    <div class="text-center mb-8">
+      <div class="inline-flex items-center justify-center w-14 h-14 bg-slate-100 text-slate-900 rounded-xl mb-4 border border-slate-200">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+        </svg>
+      </div>
+      <h2 class="text-2xl font-black text-slate-900 tracking-tight uppercase italic">
+        Admin Portal
+      </h2>
+      <p class="text-slate-400 text-xs font-bold uppercase tracking-widest mt-1">Management Access Only</p>
+    </div>
+
+    <div class="space-y-4">
+      <div class="relative">
+        <label class="hidden">Email</label>
+        <input type="email"
+               [(ngModel)]="email"
+               placeholder="Administrator Email"
+               class="w-full border-2 border-slate-100 bg-slate-50 p-3.5 rounded-xl outline-none focus:border-black focus:bg-white transition-all text-slate-900 font-medium placeholder:text-slate-400">
+      </div>
+
+      <div class="relative">
+        <label class="hidden">Password</label>
+        <input type="password"
+               [(ngModel)]="password"
+               placeholder="Secure Password"
+               class="w-full border-2 border-slate-100 bg-slate-50 p-3.5 rounded-xl outline-none focus:border-black focus:bg-white transition-all text-slate-900 font-medium placeholder:text-slate-400">
+      </div>
+
+      <button
+        (click)="login()"
+        class="w-full bg-black text-white py-4 rounded-xl font-bold uppercase tracking-widest hover:bg-slate-800 active:bg-slate-700 transform transition-all shadow-lg hover:shadow-slate-300 mt-2">
+        Authorize Login
+      </button>
+    </div>
+
+    <div class="mt-8 flex items-center justify-center gap-2">
+      <div class="h-1 w-1 bg-slate-300 rounded-full"></div>
+      <span class="text-[10px] text-slate-400 font-bold uppercase tracking-tighter">System Version 4.0.2</span>
+      <div class="h-1 w-1 bg-slate-300 rounded-full"></div>
+    </div>
+
+  </div>
+
+</div>

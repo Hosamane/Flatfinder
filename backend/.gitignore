@@ -1,0 +1,39 @@
+# ========================
+# 🔐 Environment Variables
+# ========================
+.env
+.env.*
+
+# ========================
+# 🐍 Python Virtual Environment
+# ========================
+venv/
+env/
+ENV/
+
+# ========================
+# 🧠 Python Cache
+# ========================
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# ========================
+# 🛢 Local Databases
+# ========================
+*.db
+*.sqlite3
+
+# ========================
+# 🛠 IDE / OS Files
+# ========================
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# ========================
+# 🔄 Flask Migrations Cache
+# ========================
+migrations/__pycache__/

@@ -1,0 +1,288 @@
+<!-- 
+
+<div class="min-h-screen flex">
+
+  
+  <div class="w-64 bg-black text-white p-6">
+    <h2 class="text-lg font-bold mb-6">Admin Panel</h2>
+
+    <a routerLink="dashboard"
+       class="block mb-3 hover:text-gray-300">
+      Dashboard
+    </a>
+
+    <a routerLink="bookings"
+       class="block mb-3 hover:text-gray-300">
+      Bookings
+    </a>
+
+    <a routerLink="towers"
+   class="block mb-3 hover:text-gray-300">
+  Towers
+</a>
+
+<a routerLink="units"
+   class="block mb-3 hover:text-gray-300">
+  Units
+</a>
+
+<a routerLink="bulk-units"
+   class="block mb-3 hover:text-gray-300">
+  Bulk Units
+</a>
+
+ <a routerLink="csv-upload" 
+          
+         class="block mb-3 hover:text-gray-300">
+        csv upload
+      </a>
+
+  </div>
+
+  
+  <div class="flex-1 p-8 bg-gray-100">
+    <router-outlet></router-outlet>  
+  </div>
+
+</div>
+ -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="min-h-screen flex bg-slate-50">
+
+  <aside class="w-72 bg-slate-900 text-white flex flex-col shadow-2xl">
+    
+    <div class="p-8 pb-10">
+      <div class="flex items-center gap-3">
+      
+        <h2 class="text-xl font-black tracking-tight uppercase italic text-slate-100">
+          Admin<span class="text-blue-500">Panel</span>
+        </h2>
+      </div>
+      <div class="mt-2 h-0.5 w-12 bg-blue-600 rounded-full"></div>
+    </div>
+
+    <nav class="flex-1 px-4 space-y-1">
+      
+      <p class="text-[10px] font-bold text-slate-500 uppercase tracking-[0.2em] mb-4 ml-4">Main Menu</p>
+
+      <a routerLink="dashboard" routerLinkActive="bg-blue-600 text-white"
+         class="flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 hover:bg-slate-800 group">
+        <span class="text-slate-400 group-hover:text-blue-400 transition-colors">📊</span>
+        <span class="font-medium">Dashboard</span>
+      </a>
+
+      <a routerLink="bookings" routerLinkActive="bg-blue-600 text-white"
+         class="flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 hover:bg-slate-800 group">
+        <span class="text-slate-400 group-hover:text-blue-400 transition-colors">📅</span>
+        <span class="font-medium">Bookings</span>
+      </a>
+
+      <p class="text-[10px] font-bold text-slate-500 uppercase tracking-[0.2em] mt-8 mb-4 ml-4">Property Management</p>
+
+      <a routerLink="towers" routerLinkActive="bg-blue-600 text-white"
+         class="flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 hover:bg-slate-800 group">
+        <span class="text-slate-400 group-hover:text-blue-400 transition-colors">🏢</span>
+        <span class="font-medium">Towers</span>
+      </a>
+
+      <a routerLink="units" routerLinkActive="bg-blue-600 text-white"
+         class="flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 hover:bg-slate-800 group">
+        <span class="text-slate-400 group-hover:text-blue-400 transition-colors">🔑</span>
+        <span class="font-medium">Units</span>
+      </a>
+
+      <a routerLink="bulk-units" routerLinkActive="bg-blue-600 text-white"
+         class="flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 hover:bg-slate-800 group">
+        <span class="text-slate-400 group-hover:text-blue-400 transition-colors">📦</span>
+        <span class="font-medium">Bulk Units</span>
+      </a>
+
+      <p class="text-[10px] font-bold text-slate-500 uppercase tracking-[0.2em] mt-8 mb-4 ml-4">System</p>
+
+      <a routerLink="csv-upload" routerLinkActive="bg-blue-600 text-white"
+         class="flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 hover:bg-slate-800 group">
+        <span class="text-slate-400 group-hover:text-blue-400 transition-colors">📤</span>
+        <span class="font-medium capitalize">CSV Upload</span>
+      </a>
+
+    </nav>
+
+    <div class="p-6 mt-auto border-t border-slate-800">
+      <div class="flex items-center gap-3 px-2">
+        <div class="h-10 w-10 rounded-full bg-slate-700 flex items-center justify-center text-xs font-bold">
+          AD
+        </div>
+        <div>
+          <p class="text-sm font-bold text-slate-100">Admin User</p>
+          <p class="text-[10px] text-slate-500 font-bold uppercase tracking-tighter">System Logout</p>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <main class="flex-1 flex flex-col overflow-hidden">
+    
+    <!-- <header class="h-20 bg-white border-b border-slate-200 flex items-center justify-between px-10 shadow-sm">
+      <div class="flex items-center gap-2">
+         <span class="h-2 w-2 bg-green-500 rounded-full animate-pulse"></span>
+         <span class="text-xs font-bold text-slate-400 uppercase tracking-widest">System Status: Operational</span>
+      </div>
+      <div class="flex items-center gap-6">
+        <button class="text-slate-400 hover:text-slate-600 transition-colors text-xl">🔔</button>
+        <button class="text-slate-400 hover:text-slate-600 transition-colors text-xl">⚙️</button>
+      </div>
+    </header> -->
+
+    <div class="flex-1 overflow-y-auto p-10 bg-slate-50/50">
+      <router-outlet></router-outlet>  
+    </div>
+  </main>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 
+ <div class="flex min-h-screen bg-gray-50">
+
+  <aside class="w-64 bg-zinc-950 text-zinc-400 p-5 flex flex-col border-r border-zinc-800">
+    <div class="flex items-center gap-3 px-2 mb-8">
+      <div class="h-8 w-8 bg-indigo-600 rounded-lg flex items-center justify-center text-white">
+        <span class="font-bold">A</span>
+      </div>
+      <h2 class="text-xl font-semibold text-white tracking-tight">Admin Panel</h2>
+    </div>
+
+    <nav class="space-y-1">
+      <a routerLink="dashboard" 
+         routerLinkActive="bg-zinc-800 text-white" 
+         class="flex items-center gap-3 px-3 py-2 rounded-md transition-all hover:bg-zinc-900 hover:text-white group">
+        <span class="text-sm font-medium">Dashboard</span>
+      </a>
+
+      <a routerLink="bookings" 
+         routerLinkActive="bg-zinc-800 text-white" 
+         class="flex items-center gap-3 px-3 py-2 rounded-md transition-all hover:bg-zinc-900 hover:text-white">
+        <span class="text-sm font-medium">Bookings</span>
+      </a>
+
+    
+
+      <a routerLink="towers" 
+         routerLinkActive="bg-zinc-800 text-white" 
+         class="flex items-center gap-3 px-3 py-2 rounded-md transition-all hover:bg-zinc-900 hover:text-white">
+        <span class="text-sm font-medium">Towers</span>
+      </a>
+
+      <a routerLink="units" 
+         routerLinkActive="bg-zinc-800 text-white" 
+         class="flex items-center gap-3 px-3 py-2 rounded-md transition-all hover:bg-zinc-900 hover:text-white">
+        <span class="text-sm font-medium">Units</span>
+      </a>
+
+      <a routerLink="bulk-units" 
+         routerLinkActive="bg-zinc-800 text-white" 
+         class="flex items-center gap-3 px-3 py-2 rounded-md transition-all hover:bg-zinc-900 hover:text-white">
+        <span class="text-sm font-medium">Bulk Units</span>
+      </a>
+
+       <a routerLink="csv-upload" 
+         routerLinkActive="bg-zinc-800 text-white" 
+         class="flex items-center gap-3 px-3 py-2 rounded-md transition-all hover:bg-zinc-900 hover:text-white">
+        <span class="text-sm font-medium">csv upload</span>
+      </a>
+
+    </nav>
+
+    <div class="mt-auto border-t border-zinc-800 pt-4 px-2">
+      <div class="flex items-center gap-3">
+        <div class="h-8 w-8 rounded-full bg-zinc-700"></div>
+        <div class="overflow-hidden">
+          <p class="text-xs font-medium text-white truncate">Admin User</p>
+          <p class="text-[10px] truncate">admin@company.com</p>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <main class="flex-1 overflow-y-auto">
+   
+
+    <div class="p-8">
+      <div class="max-w-7xl mx-auto">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </main>
+
+</div> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+

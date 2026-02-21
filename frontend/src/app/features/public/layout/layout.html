@@ -1,0 +1,432 @@
+ <!-- <div class="min-h-screen bg-gray-100 flex">
+
+  
+  <div class="w-72 bg-white p-6 shadow-lg fixed h-full">
+
+    <h2 class="text-lg font-bold mb-4">Filters</h2>
+
+    <div class="mb-4">
+      <label class="block mb-1 font-medium">Move-in Date</label>
+      <input type="date"
+             [(ngModel)]="filter.moveInDate"
+             class="w-full border rounded-lg p-2">
+    </div>
+
+         <div>
+  <label class="block mb-1.5 text-sm font-semibold text-slate-700">
+    Locality
+  </label>
+
+<select 
+  [ngModel]="filter.selectedLocality"
+  (ngModelChange)="filter.setLocality($event)" 
+   class="w-full bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-sm focus:ring-2 focus:ring-blue-500 outline-none transition-all">
+   <option value="">All Locations</option>
+<option *ngFor="let loc of localities" [value]="loc">
+  {{ loc }}
+</option>
+  </select>
+</div>
+
+    <div class="mb-4">
+      <label class="block mb-1 font-medium">Flat Type</label>
+     
+
+
+      <select
+  [ngModel]="filter.selectedType"
+  (ngModelChange)="filter.setType($event)"
+  class="w-full border rounded-lg p-2">
+
+  <option value="">All Types</option>
+
+  <option *ngFor="let type of flatTypes"
+          [value]="type">
+    {{ type }}
+  </option>
+
+</select>
+    </div>
+
+    <div class="mb-4">
+      <label class="block mb-1 font-medium">Furnishing</label>
+     
+
+
+      <select
+  [ngModel]="filter.selectedFurnishing"
+  (ngModelChange)="filter.setFurnishing($event)"
+  class="w-full border rounded-lg p-2">
+
+  <option value="">All Furnishing</option>
+
+  <option *ngFor="let furnish of furnishingTypes"
+          [value]="furnish">
+    {{ furnish }}
+  </option>
+
+</select>
+    </div>
+
+       <div class="mb-4">
+      <label class="block mb-1 font-medium">Balcony Type</label>
+      <select
+  [ngModel]="filter.selectedBalcony"
+  (ngModelChange)="filter.setBalcony($event)"
+  class="w-full border rounded-lg p-2">
+
+  <option value="">All Balcony Types</option>
+
+  <option *ngFor="let balcony of balconyTypes"
+          [value]="balcony">
+    {{ balcony }}
+  </option>
+
+</select>
+    </div>
+
+
+    <div class="mb-4">
+      <label class="block mb-1 font-medium">Parking</label>
+      <select [(ngModel)]="filter.selectedParking"
+              class="w-full border rounded-lg p-2">
+        <option value="">All</option>
+        <option value="yes">With Parking</option>
+        <option value="no">Without Parking</option>
+      </select>
+    </div>
+
+
+
+
+
+  </div>
+
+  
+  <div class="ml-72 flex-1 p-8">
+    <router-outlet></router-outlet>
+  </div>
+
+</div> 
+ -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="min-h-screen bg-slate-50 flex flex-col">
+  
+  <nav class="bg-white border-b border-slate-200 px-8 py-4 flex justify-between items-center sticky top-0 z-50">
+    <div class="flex items-center gap-2">
+     
+      <a routerLink="/" class="text-xl font-extrabold tracking-tight text-slate-900">
+        Flat<span class="text-blue-600">Finder</span>
+      </a>
+    </div>
+
+    <div class="flex items-center gap-8">
+      <a routerLink="/" class="text-sm font-medium text-slate-600 hover:text-blue-600 transition-colors">Home</a>
+      
+      <a *ngIf="auth.isLoggedIn()"
+         routerLink="/my-bookings"
+         class="text-sm font-medium text-slate-600 hover:text-blue-600 transition-colors">
+         My Bookings
+      </a>
+
+       <a *ngIf="auth.isLoggedIn()"
+         routerLink="/tenant-profile"
+         class="text-sm font-medium text-slate-600 hover:text-blue-600 transition-colors">
+         My Profile
+      </a>
+
+      <div class="h-6 w-[1px] bg-slate-200"></div>
+
+      <a *ngIf="!auth.isLoggedIn()"
+         routerLink="/login"
+         class="bg-blue-600 text-white px-5 py-2 rounded-full text-sm font-semibold hover:bg-blue-700 shadow-md shadow-blue-200 transition-all">
+         Login
+      </a>
+
+      <button *ngIf="auth.isLoggedIn()"
+              (click)="logout()"
+              class="flex items-center gap-2 text-sm font-semibold text-red-500 hover:text-red-600 transition-colors">
+        Logout
+      </button>
+    </div>
+  </nav>
+
+  <div class="flex flex-1">
+    
+    <aside class="w-80 bg-white border-r border-slate-200 p-6 fixed h-[calc(100vh-73px)] overflow-y-auto">
+      <div class="flex items-center justify-between mb-8">
+        <h2 class="text-lg font-bold text-slate-800">Filters</h2>
+        <button class="text-xs text-blue-600 font-semibold hover:underline">Reset All</button>
+      </div>
+
+      <div class="space-y-6">
+        <div>
+          <label class="block mb-2 text-xs font-bold uppercase tracking-wider text-slate-500">Move-in Date</label>
+          <input type="date"
+                 [(ngModel)]="filter.moveInDate"
+                 class="w-full bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-sm focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 outline-none transition-all">
+        </div>
+
+        <div>
+          <label class="block mb-2 text-xs font-bold uppercase tracking-wider text-slate-500">Locality</label>
+          <select 
+            [ngModel]="filter.selectedLocality"
+            (ngModelChange)="filter.setLocality($event)" 
+            class="w-full bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-sm focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 outline-none transition-all appearance-none cursor-pointer">
+            <option value="">All Locations</option>
+            <option *ngFor="let loc of localities" [value]="loc">{{ loc }}</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="block mb-2 text-xs font-bold uppercase tracking-wider text-slate-500">Flat Type</label>
+          <select
+            [ngModel]="filter.selectedType"
+            (ngModelChange)="filter.setType($event)"
+            class="w-full bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-sm focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 outline-none transition-all appearance-none cursor-pointer">
+            <option value="">All Types</option>
+            <option *ngFor="let type of flatTypes" [value]="type">{{ type }}</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="block mb-2 text-xs font-bold uppercase tracking-wider text-slate-500">Furnishing</label>
+          <select
+            [ngModel]="filter.selectedFurnishing"
+            (ngModelChange)="filter.setFurnishing($event)"
+            class="w-full bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-sm focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 outline-none transition-all appearance-none cursor-pointer">
+            <option value="">All Furnishing</option>
+            <option *ngFor="let furnish of furnishingTypes" [value]="furnish">{{ furnish }}</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="block mb-2 text-xs font-bold uppercase tracking-wider text-slate-500">Balcony Type</label>
+          <select
+            [ngModel]="filter.selectedBalcony"
+            (ngModelChange)="filter.setBalcony($event)"
+            class="w-full bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-sm focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 outline-none transition-all appearance-none cursor-pointer">
+            <option value="">All Balcony Types</option>
+            <option *ngFor="let balcony of balconyTypes" [value]="balcony">{{ balcony }}</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="block mb-2 text-xs font-bold uppercase tracking-wider text-slate-500">Parking</label>
+          <div class="grid grid-cols-2 gap-2">
+            <button (click)="filter.selectedParking = 'yes'"
+                    [class.bg-blue-50]="filter.selectedParking === 'yes'"
+                    [class.border-blue-500]="filter.selectedParking === 'yes'"
+                    class="border border-slate-200 rounded-lg p-2 text-sm font-medium hover:border-blue-500 transition-all text-center">
+              Yes
+            </button>
+            <button (click)="filter.selectedParking = 'no'"
+                    [class.bg-blue-50]="filter.selectedParking === 'no'"
+                    [class.border-blue-500]="filter.selectedParking === 'no'"
+                    class="border border-slate-200 rounded-lg p-2 text-sm font-medium hover:border-blue-500 transition-all text-center">
+              No
+            </button>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <main class="ml-80 flex-1 p-8 min-h-screen">
+      <div class="max-w-6xl mx-auto">
+        <router-outlet></router-outlet>
+      </div>
+    </main>
+
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 
+
+
+
+
+
+<nav class="bg-white shadow-md px-6 py-4 flex justify-between items-center">
+
+  
+  <a routerLink="/" class="text-xl font-bold text-blue-600">
+    FlatFinder
+  </a>
+
+  
+  <div class="flex items-center gap-6">
+
+    <a routerLink="/" class="hover:text-blue-600">
+      Home
+    </a>
+
+    
+    <a *ngIf="auth.isLoggedIn()"
+       routerLink="/my-bookings"
+       class="hover:text-blue-600">
+       My Bookings
+    </a>
+
+    
+    <a *ngIf="!auth.isLoggedIn()"
+       routerLink="/login"
+       class="bg-blue-600 text-white px-4 py-1 rounded-lg hover:bg-blue-700">
+       Login
+    </a>
+
+    
+    <button *ngIf="auth.isLoggedIn()"
+            (click)="logout()"
+            class="bg-red-500 text-white px-4 py-1 rounded-lg hover:bg-red-600">
+      Logout
+    </button>
+
+  </div>
+
+</nav>
+
+
+<div class="min-h-screen bg-slate-50 flex">
+
+  <aside class="w-72 bg-white border-r border-slate-200 p-6 shadow-sm fixed h-full overflow-y-auto">
+    
+    
+    
+
+    <h3 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-4">Filters</h3>
+
+    <div class="space-y-6">
+      
+      <div>
+        <label class="block mb-1.5 text-sm font-semibold text-slate-700">Move-in Date</label>
+        <input type="date"
+               [(ngModel)]="filter.moveInDate"
+               
+               class="w-full bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all">
+      </div>
+      <div>
+  <label class="block mb-1.5 text-sm font-semibold text-slate-700">
+    Locality
+  </label>
+
+<select 
+  [ngModel]="filter.selectedLocality"
+  (ngModelChange)="filter.setLocality($event)" 
+   class="w-full bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-sm focus:ring-2 focus:ring-blue-500 outline-none transition-all">
+   <option value="">All Locations</option>
+<option *ngFor="let loc of localities" [value]="loc">
+  {{ loc }}
+</option>
+  </select>
+</div>
+      <div>
+        <label class="block mb-1.5 text-sm font-semibold text-slate-700">Flat Type</label>
+        <select [(ngModel)]="filter.selectedType"
+                
+                class="w-full bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-sm focus:ring-2 focus:ring-blue-500 outline-none transition-all">
+          <option value="">All Types</option>
+          <option value="1BHK">1BHK</option>
+          <option value="2BHK">2BHK</option>
+          <option value="3BHK">3BHK</option>
+        </select>
+      </div>
+
+      <div>
+        <label class="block mb-1.5 text-sm font-semibold text-slate-700">Furnishing</label>
+        <select [(ngModel)]="filter.selectedFurnishing"
+                
+                class="w-full bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-sm focus:ring-2 focus:ring-blue-500 outline-none transition-all">
+          <option value="">Any Style</option>
+          <option value="Fully Furnished">Fully Furnished</option>
+          <option value="Fully Furnished AC">Fully Furnished AC</option>
+          <option value="Semi-Furnished">Semi-Furnished</option>
+        </select>
+      </div>
+
+      <div>
+        <label class="block mb-1.5 text-sm font-semibold text-slate-700">Parking</label>
+        <div class="grid grid-cols-2 gap-2">
+          <button (click)="filter.selectedParking = 'yes'; "
+                  [class.bg-blue-600]="filter.selectedParking === 'yes'"
+                  [class.text-white]="filter.selectedParking === 'yes'"
+                  class="py-2 text-xs font-bold border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors">
+            With
+          </button>
+          <button (click)="filter.selectedParking = 'no'; "
+                  [class.bg-blue-600]="filter.selectedParking === 'no'"
+                  [class.text-white]="filter.selectedParking === 'no'"
+                  class="py-2 text-xs font-bold border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors">
+            None
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+    <button (click)="resetFilters()" 
+            class="mt-10 w-full text-slate-400 text-xs font-bold hover:text-red-500 transition-colors uppercase tracking-tighter">
+      Clear All Filters
+    </button>
+
+  </aside>
+
+  <main class="ml-72 flex-1 min-h-screen">
+    <div class="p-8 max-w-7xl mx-auto">
+      <router-outlet></router-outlet>
+    </div>
+  </main>
+
+</div> -->

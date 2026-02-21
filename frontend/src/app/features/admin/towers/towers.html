@@ -1,0 +1,431 @@
+<!-- <h2 class="text-2xl font-bold mb-6">Tower Management</h2>
+
+
+<div class="bg-white p-6 rounded-xl shadow mb-6">
+
+  <h3 class="font-semibold mb-4">
+    {{ editMode ? 'Edit Tower' : 'Create Tower' }}
+  </h3>
+
+  <div class="grid grid-cols-2 gap-4">
+
+    <input
+      [(ngModel)]="name"
+      placeholder="Tower Name"
+      class="border p-2 rounded">
+
+    <input
+      [(ngModel)]="code"
+      placeholder="Tower Code"
+      class="border p-2 rounded">
+
+  </div>
+
+  <button
+    (click)="saveTower()"
+    class="mt-4 bg-blue-600 text-white px-4 py-2 rounded">
+
+    {{ editMode ? 'Update' : 'Create' }}
+
+  </button>
+
+  <button
+    *ngIf="editMode"
+    (click)="resetForm()"
+    class="mt-4 ml-3 bg-gray-500 text-white px-4 py-2 rounded">
+
+    Cancel
+
+  </button>
+
+</div>
+
+
+<div *ngIf="loading">Loading...</div>
+
+<div *ngFor="let tower of towers"
+     class="bg-white p-4 rounded shadow mb-3 flex justify-between items-center">
+
+  <div>
+    <h3 class="font-semibold">{{ tower.name }}</h3>
+    <p class="text-sm text-gray-600">{{ tower.code }}</p>
+  </div>
+
+  <div class="space-x-2">
+    <button
+      (click)="editTower(tower)"
+      class="bg-yellow-500 text-white px-3 py-1 rounded">
+      Edit
+    </button>
+
+    <button
+      (click)="deleteTower(tower.code)"
+      class="bg-red-600 text-white px-3 py-1 rounded">
+      Delete
+    </button>
+  </div>
+
+</div> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 
+
+
+
+<div class="max-w-6xl mx-auto p-6 antialiased">
+  <header class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-10">
+    <div>
+      <h2 class="text-3xl font-extrabold text-slate-900 tracking-tight">Tower Management</h2>
+      <p class="text-slate-500 mt-1 flex items-center gap-2">
+        <span class="flex h-2 w-2 rounded-full bg-indigo-500"></span>
+        Infrastructure Configuration & Building Registry
+      </p>
+    </div>
+    
+    <div class="flex gap-3">
+       <div class="bg-indigo-50 px-4 py-2 rounded-lg border border-indigo-100">
+         <span class="text-xs font-bold text-indigo-600 uppercase block">Total Units</span>
+         <span class="text-xl font-bold text-indigo-900">{{ towers?.length || 0 }}</span>
+       </div>
+    </div>
+  </header>
+
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+    
+    <div class="lg:col-span-4">
+      <div class="sticky top-6">
+        <div class="bg-white rounded-2xl shadow-xl shadow-slate-200/60 border border-slate-100 overflow-hidden">
+          <div [ngClass]="editMode ? 'bg-amber-500' : 'bg-indigo-600'" class="h-1.5 w-full"></div>
+          
+          <div class="p-6">
+            <h3 class="text-lg font-bold text-slate-800 mb-1">
+              {{ editMode ? 'Update Tower' : 'Add New Tower' }}
+            </h3>
+            <p class="text-xs text-slate-500 mb-6">Enter the structural identity details below.</p>
+
+            <div class="space-y-5">
+              <div class="relative">
+                <label class="text-[10px] font-bold uppercase tracking-wider text-slate-400 absolute -top-2 left-3 bg-white px-1">Name</label>
+                <input
+                  [(ngModel)]="name"
+                  placeholder="e.g. North Star"
+                  class="w-full border-2 border-slate-100 px-4 py-3 rounded-xl focus:border-indigo-500 transition-all outline-none text-sm font-medium">
+              </div>
+
+              <div class="relative">
+                <label class="text-[10px] font-bold uppercase tracking-wider text-slate-400 absolute -top-2 left-3 bg-white px-1">Unique Code</label>
+                <input
+                  [(ngModel)]="code"
+                  placeholder="T-102"
+                  class="w-full border-2 border-slate-100 px-4 py-3 rounded-xl focus:border-indigo-500 transition-all outline-none text-sm font-mono uppercase">
+              </div>
+
+              <div class="pt-2 flex flex-col gap-3">
+                <button
+                  (click)="saveTower()"
+                  [ngClass]="editMode ? 'bg-amber-500 hover:bg-amber-600' : 'bg-indigo-600 hover:bg-indigo-700'"
+                  class="w-full text-white font-bold py-3 rounded-xl transition-all transform active:scale-[0.98] shadow-lg shadow-indigo-200">
+                  {{ editMode ? 'Save Changes' : 'Register Tower' }}
+                </button>
+
+                <button
+                  *ngIf="editMode"
+                  (click)="resetForm()"
+                  class="w-full bg-slate-100 text-slate-600 font-semibold py-3 rounded-xl hover:bg-slate-200 transition-all">
+                  Discard Edit
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="lg:col-span-8">
+      <div class="flex items-center justify-between mb-4">
+        <h3 class="text-sm font-bold text-slate-400 uppercase tracking-widest">Active Inventory</h3>
+        <div class="h-px flex-1 bg-slate-100 mx-4"></div>
+      </div>
+
+      <div *ngIf="loading" class="space-y-4">
+        <div *ngFor="let i of [1,2,3]" class="h-20 bg-slate-100 animate-pulse rounded-2xl"></div>
+      </div>
+
+      <div *ngIf="!loading && towers?.length === 0" class="text-center py-20 bg-slate-50 rounded-3xl border-2 border-dashed border-slate-200">
+        <p class="text-slate-400 font-medium">No towers registered in the system yet.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div *ngFor="let tower of towers"
+             class="group relative bg-white border border-slate-200 p-5 rounded-2xl hover:shadow-2xl hover:shadow-indigo-100 hover:border-indigo-200 transition-all duration-300">
+          
+          <div class="flex items-start justify-between">
+            <div class="flex items-center gap-4">
+              <div class="h-12 w-12 bg-gradient-to-br from-slate-50 to-slate-100 rounded-xl flex items-center justify-center text-slate-400 group-hover:from-indigo-500 group-hover:to-purple-600 group-hover:text-white transition-all duration-500">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                </svg>
+              </div>
+              <div>
+                <h3 class="font-bold text-slate-900 group-hover:text-indigo-600 transition-colors">{{ tower.name }}</h3>
+                <span class="inline-block mt-1 px-2 py-0.5 bg-slate-100 text-[10px] font-bold font-mono text-slate-500 rounded uppercase tracking-tighter">
+                  ID: {{ tower.code }}
+                </span>
+              </div>
+            </div>
+
+            <div class="flex flex-col gap-2">
+              <button
+                (click)="editTower(tower)"
+                class="p-2 text-slate-400 hover:text-amber-500 hover:bg-amber-50 rounded-lg transition-all"
+                title="Edit">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                </svg>
+              </button>
+
+              <button
+                (click)="deleteTower(tower.code)"
+                class="p-2 text-slate-400 hover:text-rose-500 hover:bg-rose-50 rounded-lg transition-all"
+                title="Delete">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+  -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="max-w-5xl mx-auto pb-20">
+  
+  <div class="mb-10">
+    <h2 class="text-3xl font-black text-slate-900 tracking-tight uppercase italic">
+      Infrastructure Management
+    </h2>
+    <p class="text-slate-500 font-medium">Configure and oversee residential tower blocks</p>
+  </div>
+
+  <div class="bg-white rounded-3xl shadow-xl shadow-slate-200/50 border border-slate-100 overflow-hidden mb-10">
+    <div class="p-8">
+      <div class="flex items-center gap-3 mb-6">
+        <div class="h-10 w-10 bg-slate-900 text-white rounded-xl flex items-center justify-center shadow-lg">
+          {{ editMode ? '✎' : '+' }}
+        </div>
+        <h3 class="text-lg font-bold text-slate-800 tracking-tight">
+          {{ editMode ? 'Modify Tower Attributes' : 'Register New Tower' }}
+        </h3>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="space-y-1">
+          <label class="text-[10px] font-bold text-slate-400 uppercase tracking-widest ml-1">Tower Designation</label>
+          <input
+            [(ngModel)]="name"
+            placeholder="e.g. Skyline Heights"
+            class="w-full bg-slate-50 border-2 border-slate-50 p-3.5 rounded-xl outline-none focus:border-slate-900 focus:bg-white transition-all font-medium">
+        </div>
+
+        <div class="space-y-1">
+          <label class="text-[10px] font-bold text-slate-400 uppercase tracking-widest ml-1">Internal Asset Code</label>
+          <input
+            [(ngModel)]="code"
+            placeholder="e.g. TWR-01"
+            class="w-full bg-slate-50 border-2 border-slate-50 p-3.5 rounded-xl outline-none focus:border-slate-900 focus:bg-white transition-all font-medium uppercase">
+        </div>
+
+
+        <div class="space-y-1">
+          <label class="text-[10px] font-bold text-slate-400 uppercase tracking-widest ml-1">Locality</label>
+          <input
+            [(ngModel)]="locality"
+            placeholder="e.g. KSR"
+            class="w-full bg-slate-50 border-2 border-slate-50 p-3.5 rounded-xl outline-none focus:border-slate-900 focus:bg-white transition-all font-medium uppercase">
+        </div>
+      </div>
+
+      <div class="mt-8 flex gap-3">
+        <button
+          (click)="saveTower()"
+          class="bg-slate-900 text-white px-8 py-3.5 rounded-xl font-bold uppercase tracking-widest hover:bg-blue-600 active:scale-[0.98] transition-all shadow-lg shadow-slate-200">
+          {{ editMode ? 'Update Records' : 'Initialize Tower' }}
+        </button>
+
+        <button
+          *ngIf="editMode"
+          (click)="resetForm()"
+          class="bg-white text-slate-500 border border-slate-200 px-8 py-3.5 rounded-xl font-bold uppercase tracking-widest hover:bg-slate-50 transition-all">
+          Cancel
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="space-y-4">
+    <div class="flex items-center justify-between px-4 mb-2">
+      <h4 class="text-xs font-black text-slate-400 uppercase tracking-[0.2em]">Active Inventory</h4>
+      <div *ngIf="loading" class="flex items-center gap-2">
+        <span class="w-3 h-3 border-2 border-blue-500 border-t-transparent rounded-full animate-spin"></span>
+        <span class="text-[10px] font-bold text-blue-500 uppercase">Syncing...</span>
+      </div>
+    </div>
+
+    <div *ngFor="let tower of towers"
+         class="group bg-white p-5 rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition-all flex justify-between items-center">
+
+      <div class="flex items-center gap-5">
+        <div class="h-12 w-12 bg-slate-50 text-slate-400 rounded-xl flex items-center justify-center font-bold group-hover:bg-blue-50 group-hover:text-blue-500 transition-colors">
+          🏢
+        </div>
+        <div>
+          <h3 class="font-bold text-slate-900 text-lg tracking-tight">{{ tower.name }}</h3>
+          <p class="text-xs font-mono text-slate-400 tracking-widest uppercase">{{ tower.code }}</p>
+          <p class="text-xs font-mono text-slate-400 tracking-widest uppercase">{{ tower.locality }}</p>
+        </div>
+      </div>
+
+      <div class="flex gap-2">
+        <button
+          (click)="editTower(tower)"
+          class="h-10 w-10 flex items-center justify-center bg-slate-50 text-slate-600 rounded-lg hover:bg-amber-100 hover:text-amber-700 transition-all shadow-sm"
+          title="Edit Tower">
+          ✎
+        </button>
+
+        <button
+          (click)="deleteTower(tower.code)"
+          class="h-10 w-10 flex items-center justify-center bg-slate-50 text-slate-400 rounded-lg hover:bg-rose-100 hover:text-rose-600 transition-all shadow-sm"
+          title="Delete Tower">
+          🗑
+        </button>
+      </div>
+
+    </div>
+
+    <div *ngIf="!loading && towers.length === 0" class="text-center py-20 bg-slate-100/50 rounded-3xl border-2 border-dashed border-slate-200">
+      <p class="text-slate-400 font-medium">No towers registered in the system.</p>
+    </div>
+  </div>
+
+</div> 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,150 @@
+<!-- <div class="min-h-screen bg-gray-100 p-6">
+
+  <div class="flex flex-col md:flex-row gap-6">
+
+ 
+
+    
+    <div class="w-full md:w-3/4">
+
+      
+
+      <div class="flex justify-between items-center mb-4">
+      
+        <h2 class="text-xl font-bold">
+          Available Units in {{ towerCode }}
+        </h2>
+      
+        <select [(ngModel)]="filter.sortOption"
+                (change)="applyFilters()"
+                class="border rounded-lg p-2">
+          <option value="">Sort By</option>
+          <option value="rentLow">Rent Low → High</option>
+          <option value="rentHigh">Rent High → Low</option>
+        </select>
+      
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+        <div *ngFor="let unit of filteredUnits"
+             class="bg-white p-6 rounded-2xl shadow hover:shadow-xl transition">
+
+
+          <div class="flex justify-between items-center">
+  <h3 class="font-semibold text-lg">
+    {{ unit.unit_code }}
+  </h3>
+
+  <span class="text-xs px-3 py-1 rounded-full"
+        [ngClass]="{
+          'bg-green-100 text-green-700': true
+        }">
+    Available
+  </span>
+</div>
+
+          <p class="text-gray-600 mt-2">
+            ₹{{ unit.rent }}
+          </p>
+
+          <div class="mt-2 text-sm text-gray-500">
+            <p>{{ unit.flat_type }}</p>
+            <p>{{ unit.furnishing }}</p>
+            <p *ngIf="unit.parking">Parking Available</p>
+          </div>
+
+
+    <button
+  (click)="goToUnit(unit.unit_code)"
+  class="mt-4 w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition">
+  View Details
+</button>
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+</div> -->
+
+
+<div class="min-h-screen bg-slate-50 p-6">
+  <div class="max-w-7xl mx-auto">
+    
+    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
+      <div>
+        <h2 class="text-2xl font-extrabold text-slate-800 tracking-tight">
+          Available Units in <span class="text-blue-600">{{ towerCode }}</span>
+        </h2>
+        <p class="text-slate-500 text-sm">Found {{ filteredUnits.length }} units matching your criteria</p>
+      </div>
+
+      <div class="flex items-center gap-2">
+        <label class="text-sm font-medium text-slate-600">Sort:</label>
+        <select [(ngModel)]="filter.sortOption"
+                (change)="applyFilters()"
+                class="bg-white border border-slate-200 text-slate-700 rounded-lg p-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none shadow-sm transition">
+          <option value="">Default</option>
+          <option value="rentLow">Rent: Low → High</option>
+          <option value="rentHigh">Rent: High → Low</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      
+      <div *ngFor="let unit of filteredUnits"
+           class="group bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+        
+
+           
+        <div class="h-32 bg-slate-100 flex items-center justify-center relative border-b border-slate-50">
+          <div class="text-center">
+            <span class="block text-[10px] uppercase tracking-widest text-slate-400 font-bold">Unit Number</span>
+            <h3 class="font-black text-2xl text-slate-700">{{ unit.unit_code }}</h3>
+          </div>
+          
+          <span class="absolute top-3 right-3 text-[10px] font-bold px-2 py-1 rounded-full bg-green-100 text-green-700 uppercase">
+            Available
+          </span>
+        </div>
+
+        <div class="p-5">
+          <div class="flex justify-between items-end mb-4">
+            <div>
+              <p class="text-blue-600 font-black text-xl">₹{{ unit.rent }}<span class="text-xs text-slate-400 font-normal">/mo</span></p>
+              <p class="text-slate-800 font-semibold">{{ unit.flat_type }}</p>
+            </div>
+            <div class="text-right">
+               <span class="text-xs text-slate-500 bg-slate-100 px-2 py-1 rounded">{{ unit.furnishing }}</span>
+            </div>
+          </div>
+
+          <div class="flex flex-wrap gap-2 mb-6">
+            <span *ngIf="unit.parking" class="flex items-center gap-1 text-[11px] font-medium text-slate-600 bg-blue-50 px-2 py-1 rounded">
+              🚗 Parking
+            </span>
+            <span class="flex items-center gap-1 text-[11px] font-medium text-slate-600 bg-slate-50 px-2 py-1 rounded">
+              🏢 {{ towerCode }}
+            </span>
+          </div>
+
+          <button (click)="goToUnit(unit.unit_code)"
+                  class="w-full bg-slate-900 text-white py-3 rounded-xl font-bold text-sm hover:bg-blue-600 transition-colors duration-200 shadow-lg shadow-slate-200 hover:shadow-blue-200">
+            View Details
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+    <div *ngIf="filteredUnits.length === 0" class="text-center py-20 bg-white rounded-3xl border-2 border-dashed border-slate-200">
+      <p class="text-slate-400 font-medium">No units found matching your filters.</p>
+      <button (click)="filter.sortOption = ''; applyFilters()" class="mt-2 text-blue-600 font-bold hover:underline">Reset Filters</button>
+    </div>
+
+  </div>
+</div>
