@@ -1,6 +1,6 @@
 import os
 from dotenv import load_dotenv
-from flask import Flask
+from flask import Flask, app
 from app.extensions import db, jwt, migrate
 from app.routes import register_blueprints
 from flask_cors import CORS
@@ -24,7 +24,8 @@ def create_app():
     app.config["JWT_SECRET_KEY"] = os.getenv("JWT_SECRET_KEY")
     frontend_url = os.getenv("FRONTEND_URL")
     if frontend_url:
-        CORS(app, origins=["http://localhost:8080","http://localhost:4200"])
+        CORS(app, origins=[frontend_url])
+        # CORS(app, origins=["http://localhost:8080","http://localhost:4200"])
     # else:
     #     CORS(app)  
 
