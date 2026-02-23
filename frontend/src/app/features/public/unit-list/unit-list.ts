@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { FilterService } from '../../../core/services/filter/filter.service';
+import { LayoutComponent } from '../layout/layout';
 
 @Component({
   selector: 'app-unit-list',
@@ -109,9 +110,12 @@ applyFilters() {
     tempUnits.sort((a, b) => Number(b.rent) - Number(a.rent));
   }
 
+   
+
   this.filteredUnits = tempUnits;
 }
 
+  
 
   // 🔥 Sorting logic
       goToUnit(code: string) {

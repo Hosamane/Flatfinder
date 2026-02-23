@@ -27,7 +27,8 @@ def add_unit(code):
             "furnishing":unit.furnishing,
             "balcony_type":unit.balcony_type,
             "parking":unit.parking,
-            "facing_direction":unit.facing_direction
+            "facing_direction":unit.facing_direction,
+            "is_active":unit.is_active
         }) ,201 
     except Exception as e:
         return jsonify({"error":str(e)}),400
@@ -53,7 +54,8 @@ def list_units(code):
             "furnishing":unit.furnishing,
             "balcony_type":unit.balcony_type,
             "parking":unit.parking,
-            "facing_direction":unit.facing_direction
+            "facing_direction":unit.facing_direction,
+            "is_active":unit.is_active
             }
             for unit in units
         ]),200
@@ -63,12 +65,36 @@ def list_units(code):
     
 
 
+# @admin_bp.route("/units/<string:unit_code>",methods=["DELETE"])
+# @admin_required
+# def remove_unit(unit_code):
+#     try:
+#         delete_unit(unit_code)
+#         return jsonify({"message":"Unit deleted"}),200
+#     except Exception as e:
+#         return jsonify({"error":str(e)}),400
+
+
+
+
+import cloudinary.uploader
+
 @admin_bp.route("/units/<string:unit_code>",methods=["DELETE"])
 @admin_required
 def remove_unit(unit_code):
     try:
-        delete_unit(unit_code)
-        return jsonify({"message":"Unit deleted"}),200
+        unit = Unit.query.filter_by(unit_code=unit_code.upper()).first_or_404()
+
+        # 🔥 Delete image from Cloudinary if exists
+        if unit.image:
+            cloudinary.uploader.destroy(unit.image.cloudinary_public_id)
+            db.session.delete(unit.image)
+
+        db.session.delete(unit)
+        db.session.commit()
+
+        return jsonify({"message":"Unit deleted successfully"}),200
+
     except Exception as e:
         return jsonify({"error":str(e)}),400
     
@@ -152,7 +178,8 @@ def list_all_units():
             "parking": u.parking,
             "facing_direction": u.facing_direction,
             "is_active": u.is_active,
-            "occupied": active_booking is not None
+            "occupied": active_booking is not None,
+            "image_url":u.image.cloudinary_url  if u.image else None
         })
     # return jsonify([
     #     {
@@ -196,5 +223,6 @@ def get_single_unit(unit_code):
         "balcony_type": unit.balcony_type,
         "parking": unit.parking,
         "facing_direction": unit.facing_direction,
+        "image_url": unit.image.cloudinary_url if unit.image else None,
         "is_active": unit.is_active
     }), 200

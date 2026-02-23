@@ -258,4 +258,20 @@ getAdminDashboard() {
   return this.http.get(`${this.baseUrl}/admin/dashboard`);
 }
 
+
+
+
+deleteUnitImage(unitCode: string) {
+  return this.http.delete(
+    `${this.baseUrl}/admin/units/${unitCode}/delete-image`,
+    {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('access_token')}`
+      }
+    }
+  );
+}
+
+
+
 }

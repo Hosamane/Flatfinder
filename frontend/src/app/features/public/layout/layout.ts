@@ -97,6 +97,11 @@ export class LayoutComponent implements OnInit {
       this.balconyTypes = res.balcony_types;
     });
 
+
+    
+
+    
+
   }
 
   resetFilters() {
@@ -115,5 +120,10 @@ export class LayoutComponent implements OnInit {
     this.auth.logout();
     this.router.navigate(['/']);
   }
+
+
+
+
+ 
 
 }
