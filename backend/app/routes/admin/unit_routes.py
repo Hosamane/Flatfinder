@@ -18,7 +18,7 @@ def add_unit(code):
         unit = create_unit(code,data)
 
         return jsonify({ 
-            "unit code":unit.unit_code,
+            "unit_code":unit.unit_code,
             "wing":unit.wing,
             "flat_number":unit.flat_number,
             "rent":str(unit.rent),
@@ -28,6 +28,7 @@ def add_unit(code):
             "balcony_type":unit.balcony_type,
             "parking":unit.parking,
             "facing_direction":unit.facing_direction,
+            "image_url": unit.image.cloudinary_url if unit.image else None,
             "is_active":unit.is_active
         }) ,201 
     except Exception as e:
