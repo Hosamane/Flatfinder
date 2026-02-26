@@ -59,7 +59,7 @@ from app.models.booking import Booking
 def get_available_units(code):
 
     move_in_date = request.args.get("move_in_date")
-
+    
     if move_in_date:
         move_in_date = datetime.strptime(move_in_date, "%Y-%m-%d").date()
     else:
@@ -87,6 +87,8 @@ def get_available_units(code):
         .subquery()
     )
 
+    
+
     # Main query
     units = (
         Unit.query
@@ -96,6 +98,7 @@ def get_available_units(code):
             Unit.is_active == True,
             Unit.available_from <= move_in_date,
             ~Unit.id.in_(occupied_subquery),
+            
             
         )
         .all()

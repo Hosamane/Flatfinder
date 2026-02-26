@@ -89,9 +89,16 @@ def create_unit(tower_code, data):
     if existing_unit:
         raise ValueError("Unit with this code already exists")
 
-    floor_number = data.get("floor_number")
-    rent = data.get("rent")
-    # available_from = data.get("available_from")
+
+
+    try:
+        floor_number = int(data.get("floor_number"))
+        rent = float(data.get("rent"))
+    except (TypeError, ValueError):
+        raise ValueError("Floor number must be an integer and rent must be a number")
+    
+
+    available_from = data.get("available_from")
     flat_type = data.get("flat_type")
     furnishing = data.get("furnishing")
     balcony_type = data.get("balcony_type")
@@ -108,6 +115,9 @@ def create_unit(tower_code, data):
     else:
         available_from = date.today()
 
+
+
+    
     unit = Unit(
         tower_id=tower.id,
         unit_code=unit_code.upper(),

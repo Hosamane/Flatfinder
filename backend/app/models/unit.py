@@ -111,6 +111,6 @@ class Unit(db.Model):
     )
 
 
-table_args__ = (
+__table_args__ = (
         Index("idx_unit_search", "flat_type", "furnishing", "rent", "available_from"),
     )
