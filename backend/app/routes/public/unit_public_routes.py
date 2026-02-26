@@ -73,7 +73,7 @@ def get_available_units(code):
     #     .with_entities(Booking.unit_id)
     #     .subquery()
     # )
-
+ 
 
     # Subquery to find occupied unit IDs
     occupied_subquery = (
