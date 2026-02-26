@@ -22,7 +22,7 @@ class Booking(db.Model):
     )
 
     status = db.Column(
-        db.Enum("PENDING", "APPROVED", "REJECTED", name="booking_status"),
+        db.Enum("PENDING", "APPROVED", "REJECTED","COMPLETED","CANCELLED", name="booking_status"),
         default="PENDING",
         nullable=False,
         index=True
@@ -39,6 +39,10 @@ class Booking(db.Model):
         db.DateTime,
         server_default=db.func.now()
     )
+
+    exitedBeforeLeaseEnd = db.Column(db.Boolean, default= False) 
+
+    actual_move_out_date = db.Column(db.Date, nullable=True)
 
     user = db.relationship("User", back_populates="bookings")
     unit = db.relationship("Unit", back_populates="bookings")

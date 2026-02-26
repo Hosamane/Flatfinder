@@ -1,16 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../../core/service/api.service';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { error } from 'console';
 
 @Component({
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './bookings.html'
 })
 export class AdminBookingsComponent implements OnInit {
 
   bookings: any[] = [];
   loading = true;
+  vacateDates: {[key:number]: string}={};
 
   constructor(private api: ApiService) {}
 
@@ -39,5 +42,50 @@ export class AdminBookingsComponent implements OnInit {
       .subscribe(() => {
         this.loadBookings();
       });
+  }
+
+  moveOut(id: number) {
+    const date=this.vacateDates[id];
+
+    if(!date){
+      alert("Please select a vacate date");
+      return;
+    }
+
+    this.api.moveOutBooking(id,date).subscribe({
+      next: ()=>{
+        alert("Booking completed");
+        this.loadBookings();
+      },
+      error: (err) =>{
+        alert(err.error?.error || "Moved out failed");
+        console.error(err);}
+    });
+  }
+
+
+
+  // cancel(id:number){
+  //   if(!confirm("Are you sure you want to cancel this booking?")) return;
+
+  //   this.api.cancelBooking(id).subscribe({
+  //     next: ()=>{
+  //       alert("Booking cancelled");
+  //       this.loadBookings();
+  //     },
+  //     error: (err) =>{
+  //       alert(err.error?.error || "Failed to cancel booking");
+  //       console.error(err);
+  //     }
+  //   });
+  // }
+
+
+
+
+  isBeforeLeaseStart(leaseStart: string): boolean{
+    const today = new Date();
+    const leaseStartDate = new Date(leaseStart);
+    return today<leaseStartDate;
   }
 }

@@ -64,8 +64,15 @@ def get_available_units(code):
         move_in_date = datetime.strptime(move_in_date, "%Y-%m-%d").date()
     else:
         move_in_date = date.today()
-
-
+    
+    #before lease    
+    # beforeLease = (
+    #     Booking.query.filter(
+    #         Booking.exitedBeforeLeaseEnd == True
+    #     )
+    #     .with_entities(Booking.unit_id)
+    #     .subquery()
+    # )
 
 
     # Subquery to find occupied unit IDs
@@ -88,7 +95,8 @@ def get_available_units(code):
             Tower.code == code.upper(),
             Unit.is_active == True,
             Unit.available_from <= move_in_date,
-            ~Unit.id.in_(occupied_subquery)
+            ~Unit.id.in_(occupied_subquery),
+            
         )
         .all()
     )

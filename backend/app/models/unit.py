@@ -102,6 +102,7 @@ class Unit(db.Model):
         db.DateTime,
         server_default=db.func.now()
     )
+    
 
     bookings = db.relationship(
         "Booking",

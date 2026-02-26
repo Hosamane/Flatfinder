@@ -116,6 +116,18 @@ updateBookingStatus(id: number, status: string) {
   );
 }
 
+moveOutBooking(id: number, vacate_date: string){
+  return this.http.post(
+    `${this.baseUrl}/admin/bookings/${id}/move-out`, {vacate_date}
+  );
+}
+
+
+// cancelBooking(id:number){
+//   return this.http.post(
+//     `${this.baseUrl}/admin/bookings/${id}/cancel`,{}
+//   )
+// }
 getTowersAll() {
   return this.http.get(
     `${this.baseUrl}/admin/towers`,

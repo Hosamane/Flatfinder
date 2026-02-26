@@ -1,3 +1,5 @@
+from datetime import date
+
 from app.extensions.db import db
 from app.models.booking import Booking
 from app.models.unit import Unit
@@ -76,3 +78,45 @@ def approve_booking(booking_id):
         raise
 
     return booking
+
+
+# def leftBeforeLeaseEnd(booking_id, left_before):
+
+#     booking = Booking.query.get(booking_id)
+
+#     if not booking:
+#         raise ValueError("Booking not found")
+
+#     if booking.status != "APPROVED":
+#         raise ValueError("Booking not approved yet")
+
+#     # 🔐 TRANSACTION START
+#     try:
+
+#         # Lock the unit row to prevent race condition
+#         unit = (
+#             db.session.query(Unit)
+#             .filter(Unit.id == booking.unit_id)
+#             .with_for_update()
+#             .first()
+#         )
+
+#         # Check again inside transaction
+#         existing_approved = Booking.query.filter(
+#             Booking.unit_id == booking.unit_id,
+#             Booking.status == "APPROVED",
+#             Booking.lease_end == date.today() 
+#         ).first()
+
+#         if existing_approved:
+#             raise ValueError("Unit already occupied")
+
+#         booking.exitedBeforeLeaseEnd = left_before
+
+#         db.session.commit()
+
+#     except:
+#         db.session.rollback()
+#         raise
+
+#     return booking
